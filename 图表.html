@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ECharts</title>
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <script src="liuxinyu/echarts.js"></script>
+  </head>
+  <body>
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+    <div id="main" style="width: 800px;height:600px;"></div>
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById('main'));
+
+      // 指定图表的配置项和数据
+      option = {
+  color: ['#67F9D8', '#FFE434', '#56A3F1', '#FF917C'],
+  title: {
+    text: '四川水电装机分布示意图'
+  },
+  legend: {},
+  radar: 
+    {
+      indicator: [
+        { text: '岷江流域' },
+        { text: '雅砻江流域' },
+        { text: '嘉陵江流域' },
+        { text: '金沙江流域' },
+        { text: '大渡河流域' }
+      ],
+      center: ['50%', '50%'],
+      radius: 200,
+      startAngle: 90,
+      splitNumber: 4,
+      shape: 'circle',
+      axisName: {
+        formatter: '【{value}】',
+        color: '#428BD4'
+      },
+      splitArea: {
+        areaStyle: {
+          color: ['#71669e', '#e098c7', '#8fd3e8', '#71669e'],
+          shadowColor: 'rgba(0, 0, 0, 0.2)',
+          shadowBlur: 10
+        }
+      },
+      axisLine: {
+        lineStyle: {
+          color: 'rgba(211, 253, 250, 0.8)'
+        }
+      },
+      splitLine: {
+        lineStyle: {
+          color: 'rgba(211, 253, 250, 0.8)'
+        }
+      }
+    },
+
+
+  series:[
+    {
+      type: 'radar',
+      emphasis: {
+        lineStyle: {
+          width: 4
+        }
+      },
+      data: [
+        {
+          value: [100, 8, 0.4, -80, 2000],
+          name: '已建水电站'
+        },
+        {
+          value: [60, 5, 0.3, -100, 1500],
+          name: '总装机',
+          areaStyle: {
+            color: 'rgba(255, 228, 52, 0.6)'
+          }
+        }
+      ]
+    },
+    {
+      type: 'radar',
+      radarIndex: 1,
+      data: [
+        {
+          value: [120, 118, 130, 100, 99, 70],
+          name: '技术开发量',
+          symbol: 'rect',
+          symbolSize: 12,
+          lineStyle: {
+            type: 'dashed'
+          },
+          label: {
+            show: true,
+            formatter: function (params) {
+              return params.value;
+            }
+          }
+        },
+        {
+          value: [100, 93, 50, 90, 70, 60],
+          name: '占全国总量',
+          areaStyle: {
+            color: new echarts.graphic.RadialGradient(0.1, 0.6, 1, [
+              {
+                color: 'rgba(255, 145, 124, 0.1)',
+                offset: 0
+              },
+              {
+                color: 'rgba(255, 145, 124, 0.9)',
+                offset: 1
+              }
+            ])
+          }
+        }
+      ]
+    }
+  ]
+};
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+    </script>
+  </body>
+</html>
